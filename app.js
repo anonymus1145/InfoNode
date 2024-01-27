@@ -1,3 +1,5 @@
+// Import the mongoose module first for respose reasons when connecting to the database
+const mongoose = require("mongoose");
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -9,6 +11,25 @@ const usersRouter = require("./routes/users");
 const aboutRouter = require("./routes/about");
 
 const app = express();
+
+//Configuration and connecting to the database -------------------------------------
+
+// Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
+// Included because it removes preparatory warnings for Mongoose 7.
+// See: https://mongoosejs.com/docs/migrating_to_6.html#strictquery-is-removed-and-replaced-by-strict
+mongoose.set("strictQuery", false);
+
+// Define the database URL to connect to.
+const mongoDB = "mongodb://127.0.0.1/my_database";
+
+// Wait for database to connect, logging an error if there is a problem
+main().catch((err) => console.log(err));
+async function main() {
+    await mongoose.connect(mongoDB);
+    mongoose.connection.once("open", (() => console.log("Database connected")));
+}
+
+// -------------------------------------------------------------------------------
 
 // view engine setup
 // eslint-disable-next-line no-undef
