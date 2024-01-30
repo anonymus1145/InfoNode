@@ -48,7 +48,7 @@ async function genreCreate(index, name) {
 }
   
 async function authorCreate(index, first_name, family_name, d_birth, d_death) {
-    const authordetail = { first_name: first_name, family_name: family_name };
+    const authordetail = { first_name: first_name, family_name: family_name }; 
     if (d_birth != false) authordetail.date_of_birth = d_birth;
     if (d_death != false) authordetail.date_of_death = d_death;
   
