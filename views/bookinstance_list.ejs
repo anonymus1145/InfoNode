@@ -15,7 +15,7 @@
     <ul>
       <% bookinstance_list.forEach((val) => { %>
         <li> 
-          <a href="val_url"> <%= val.book.title %> </a> <%= val.imprint %>
+          <a href="val.url"> <%= val.book.title %> </a> <%= val.imprint %>
             <% if (val.status === 'Available') { %>
               <span class="badge bg-success"> <%= val.status %> </span>
             <% } else if (val.status === 'Maintenance') { %>
